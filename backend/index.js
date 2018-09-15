@@ -7,8 +7,9 @@ var mysql = require('mysql');
 // db stuff
 var con = mysql.createConnection({
   host: "localhost",
-  user: "sandro",
-  password: "sandrosandro"
+  user: "root",
+  password: "root",
+  database: "mydb"
 });
 
 con.connect(function(err) {
@@ -16,11 +17,18 @@ con.connect(function(err) {
   console.log("Connected!");
 });
 
+app.get('/listUsers', function (req, res){
+  con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields){
+    if (error) throw error;
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+  });
+});
+
 app.get('/listMeals', function (req, res) {
-   fs.readFile( __dirname + "/" + "meals.json", 'utf8', function (err, data) {
-       console.log( data );
-       res.end( data );
-   });
+  con.query('SELECT * from meal', function (error, results, fields){
+    if (error) throw error;
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+  });
 })
 
 app.get('/listRecipes', function (req, res){
