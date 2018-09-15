@@ -37,13 +37,13 @@ app.get('/listRecipes', function (req, res){
 });
 
 app.get('/ingredient/list', function (req, res){
-  res.status(200).send(JSON.stringify(recipe.ingredientsList));
+  res.status(200).json(recipe.ingredientsList);
 });
 
 app.get('/ingredient/:id', function (req, res){
-  var ingredient = recipe.ingredientsList.find(e => e.id === reg.params.id)
+  var ingredient = recipe.ingredientsList.find(e => e.id === req.params.id)
   if(ingredient) {
-    return res.status(200).send(JSON.stringify(ingredient));
+    return res.status(200).json(ingredient);
   }
   res.status(404);
 });
