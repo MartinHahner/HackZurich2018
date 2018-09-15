@@ -1,0 +1,28 @@
+
+User
+    id
+    firstname
+    lastname
+    
+Meal
+    id
+    host_id
+    when
+    duration
+    location
+    title
+    description
+    max_people
+    co2_score
+    incredients
+    
+Review
+    meal_id
+    user_id
+    rating
+    text
+    
+Tip
+    user_id
+    host_id
+    amount
