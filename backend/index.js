@@ -47,7 +47,7 @@ app.get('/', function (req, res) {
 app.get('/meal', function (req, res) {
   con.query('SELECT * from meal', function (error, results, fields){
     if (error) throw error;
-    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    res.status(200).json(results);
   });
 });
 
@@ -63,9 +63,7 @@ app.post('/meal', function (req, res){
               'ingredients': req.body.ingredients};
 
   var query = con.query('INSERT INTO meal SET ?', meal, function (error, results){
-    res.send(meal);
-    console.log(query.sql);
-
+    res.status(200).json(meal);
   });
 
 });
@@ -73,7 +71,7 @@ app.post('/meal', function (req, res){
 app.get('/user', function (req, res){
   con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields){
     if (error) throw error;
-    res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+    res.status(200).json(results);
   });
 });
 
@@ -86,7 +84,7 @@ app.get('/participate', function (req, res){
             'FROM user u, participate p, meal m WHERE p.idmeal = m.idmeal AND u.iduser = p.iduser AND m.idmeal = ?', [idmeal],
             function (error, results, fields){
               if(error) console.log(error);
-              res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+              res.status(200).json(results);
             });
 
 });
@@ -104,7 +102,12 @@ app.post('/participate', function (req, res){
 
 // TOOD: update a standby(0) participation to accept (1) it or refuse (2) it
 app.put('/participate', function (req, res){
-
+  var query = con.query('UPDATE participate SET status = ? WHERE idmeal = ? AND iduser = ?', [parseInt(req.body.stat),parseInt(req.body.idmeal), parseInt(req.body.iduser)],
+    function(error, results){
+      if (error) console.log(error);
+      res.status(200).send(results.affectedRows + " record(s) updated");
+    });
+  console.log(query.sql);
 });
 
 
