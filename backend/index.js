@@ -43,7 +43,7 @@ app.get('/', function (req, res){
   res.send('hello!');
 });
 
-app.post('/createMeal', function (req, res){
+app.post('/meal', function (req, res){
   var meal = {'when': req.body.when,
               'title': req.body.title,
               'description': req.body.description,
@@ -62,6 +62,13 @@ app.post('/createMeal', function (req, res){
 
 });
 
+app.get('/meal', function (req, res) {
+  con.query('SELECT * from meal', function (error, results, fields){
+    if (error) throw error;
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+  });
+});
+
 app.get('/listUsers', function (req, res){
   con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields){
     if (error) throw error;
@@ -69,12 +76,18 @@ app.get('/listUsers', function (req, res){
   });
 });
 
-app.get('/listMeals', function (req, res) {
-  con.query('SELECT * from meal', function (error, results, fields){
-    if (error) throw error;
-    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+
+app.post('/participate', function (req, res){
+  var participation = {'idmeal': req.body.idmeal,
+                       'iduser': req.body.iduser,
+                       'accepted': 0};
+
+  var query = con.query('INSERT INTO participate SET ?', participation, function (error, results){
+    if (error) console.log(error);
+    res.status(200).json(participation);
   });
-})
+});
+
 
 app.get('/ingredient/list', function (req, res){
   res.status(200).json(recipe.ingredientsList);
