@@ -53,21 +53,10 @@ CREATE TABLE IF NOT EXISTS `participate` (
   `idmeal` INT NOT NULL,
   `iduser` INT NOT NULL,
   `status` TINYINT NULL,
-  PRIMARY KEY (`idmeal`, `iduser`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `review`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `review` ;
-
-CREATE TABLE IF NOT EXISTS `review` (
-  `idreview` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(300) NULL,
+  `text` VARCHAR(500) NULL,
   `stars` DECIMAL(10) NULL,
   `tip` DECIMAL(10) NULL,
-  PRIMARY KEY (`idreview`))
+  PRIMARY KEY (`idmeal`, `iduser`))
 ENGINE = InnoDB;
 
 
@@ -90,7 +79,8 @@ COMMIT;
 -- Data for table `meal`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (1, '2018-09-15', 0, 0, 'Spaghetti carbonara', 'Just some very good spaghetti', 'Technopark 1', 'Zurich', '8400', 3, '10', NULL, NULL);
+INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (1, '2018-09-15', 0, 0, 'Spaghetti carbonara', 'Just some very good spaghetti', 'Technopark 1', 'Zurich', '8400', 3, '10', NULL, 1);
+INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (2, '2018-09-15', 0, 10, 'Pizza', 'Pizza from Italia', 'Bahnhofstrasse 10', 'Zurich', '8400', 5, '5', NULL, 2);
 
 COMMIT;
 
@@ -99,8 +89,10 @@ COMMIT;
 -- Data for table `participate`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `participate` (`idmeal`, `iduser`, `status`) VALUES (1, 1, 0);
-INSERT INTO `participate` (`idmeal`, `iduser`, `status`) VALUES (1, 2, 1);
+INSERT INTO `participate` (`idmeal`, `iduser`, `status`, `text`, `stars`, `tip`) VALUES (1, 1, 2, 'It was amazing', 5, 20);
+INSERT INTO `participate` (`idmeal`, `iduser`, `status`, `text`, `stars`, `tip`) VALUES (1, 2, 2, 'It was cold', 2, 1);
+INSERT INTO `participate` (`idmeal`, `iduser`, `status`, `text`, `stars`, `tip`) VALUES (2, 1, 1, NULL, NULL, NULL);
+INSERT INTO `participate` (`idmeal`, `iduser`, `status`, `text`, `stars`, `tip`) VALUES (2, 3, 0, NULL, NULL, NULL);
 
 COMMIT;
 
