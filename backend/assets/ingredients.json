@@ -1,19 +1,19 @@
-[
-  {
+{
+  "almond-milk": {
     "id": "almond-milk",
     "name": "Almond milk",
     "Co2PerKg": 1.09,
     "mjPerKg": 1.09,
     "m3perKg": 1.09
   },
-  {
+  "almonds": {
     "id": "almonds",
     "name": "Almonds",
     "Co2PerKg": 2.18,
     "mjPerKg": 26.31,
     "m3perKg": 1.90
   },
-  {
+  "beef": {
     "id": "beef",
     "name": "Beef",
     "type": "meat",
@@ -21,21 +21,21 @@
     "mjPerKg": 164.22,
     "m3perKg": 0.47
   },
-  {
+  "cheese-slices": {
     "id": "cheese-slices",
     "name": "Cheese slices",
     "Co2PerKg": 8.29,
     "mjPerKg": 35.50,
     "m3perKg": 0.15
   },
-  {
+  "cheese-spread": {
     "id": "cheese-spread",
     "name": "Cheese spread",
     "Co2PerKg": 6.20,
     "mjPerKg": 26.71,
     "m3perKg": 0.11
   },
-  {
+  "chicken": {
     "id": "chicken",
     "name": "Chicken",
     "type": "meat",
@@ -43,28 +43,28 @@
     "mjPerKg": 64.14,
     "m3perKg": 0.34
   },
-  {
+  "chocolate": {
     "id": "chocolate",
     "name": "Chocolate",
     "Co2PerKg": 14.67,
     "mjPerKg": 90.25,
     "m3perKg": 0.38
   },
-  {
+  "chocolate-milk": {
     "id": "chocolate-milk",
     "name": "Chocolate milk",
     "Co2PerKg": 4.65,
     "mjPerKg": 26.92,
     "m3perKg": 0.11
   },
-  {
+  "corn": {
     "id": "corn",
     "name": "Corn",
     "Co2PerKg": 0.19,
     "mjPerKg": 1.88,
     "m3perKg": 0.06
   },
-  {
+  "dried-beef": {
     "id": "dried-beef",
     "name": "Dried Beef",
     "type": "meat",
@@ -72,35 +72,35 @@
     "mjPerKg": 164.22,
     "m3perKg": 0.47
   },
-  {
+  "dry-pasta": {
     "id": "dry-pasta",
     "name": "Dry Pasta",
     "Co2PerKg": 1.49,
     "mjPerKg": 17.23,
     "m3perKg": 0.01
   },
-  {
+  "fresh-ravioli-with-meat": {
     "id": "fresh-ravioli-with-meat",
     "name": "Fresh ravioli with meat",
     "Co2PerKg": 10.25,
     "mjPerKg": 66.22,
     "m3perKg": 0.16
   },
-  {
+  "fresh-ravioli-with-spinach-and-ricotta": {
     "id": "fresh-ravioli-with-spinach-and-ricotta",
     "name": "Fresh ravioli with spinach and ricotta",
     "Co2PerKg": 3.06,
     "mjPerKg": 20.38,
     "m3perKg": 0.04
   },
-  {
+  "gruyere": {
     "id": "gruyere",
     "name": "Gruyére",
     "Co2PerKg": 8.29,
     "mjPerKg": 35.50,
     "m3perKg": 0.15
   },
-  {
+  "ham": {
     "id": "ham",
     "name": "Ham",
     "type": "meat",
@@ -108,28 +108,28 @@
     "mjPerKg": 91.40,
     "m3perKg": 0.52
   },
-  {
+  "lentils": {
     "id": "lentils",
     "name": "Lentils",
     "Co2PerKg": 0.78,
     "mjPerKg": 5.67,
     "m3perKg": 0.14
   },
-  {
+  "low-fat-organic-milk": {
     "id": "low-fat-organic-milk",
     "name": "Low fat organic milk",
     "Co2PerKg": 1.11,
     "mjPerKg": 1.39,
     "m3perKg": 0.00
   },
-  {
+  "non-free-range-eggs": {
     "id": "non-free-range-eggs",
     "name": "Non-free range eggs",
     "Co2PerKg": 3.94,
     "mjPerKg": 36.10,
     "m3perKg": 0.18
   },
-  {
+  "pancetta": {
     "id": "pancetta",
     "name": "Pancetta",
     "type": "meat",
@@ -137,7 +137,7 @@
     "mjPerKg": 91.40,
     "m3perKg": 0.52
   },
-  {
+  "pork": {
     "id": "pork",
     "name": "Pork",
     "type": "meat",
@@ -145,7 +145,7 @@
     "mjPerKg": 91.40,
     "m3perKg": 0.52
   },
-  {
+  "pork-sausages": {
     "id": "pork-sausages",
     "name": "Pork sausages",
     "type": "meat",
@@ -153,35 +153,35 @@
     "mjPerKg": 91.40,
     "m3perKg": 0.52
   },
-  {
+  "quorn": {
     "id": "quorn",
     "name": "Quorn",
     "Co2PerKg": 0.19,
     "mjPerKg": 1.88,
     "m3perKg": 0.06
   },
-  {
+  "red-kidney-beans": {
     "id": "red-kidney-beans",
     "name": "Red kidney beans",
     "Co2PerKg": 0.78,
     "mjPerKg": 5.67,
     "m3perKg": 0.14
   },
-  {
+  "rice-milk": {
     "id": "rice-milk",
     "name": "Rice milk",
     "Co2PerKg": 0.26,
     "mjPerKg": 0.26,
     "m3perKg": 0.26
   },
-  {
+  "risotto-rice": {
     "id": "risotto-rice",
     "name": "Risotto rice",
     "Co2PerKg": 1.03,
     "mjPerKg": 5.43,
     "m3perKg": 0.35
   },
-  {
+  "sliced-beef": {
     "id": "sliced-beef",
     "name": "Sliced beef",
     "type": "meat",
@@ -189,7 +189,7 @@
     "mjPerKg": 164.22,
     "m3perKg": 0.47
   },
-  {
+  "sliced-chicken": {
     "id": "sliced-chicken",
     "name": "Sliced chicken",
     "type": "meat",
@@ -197,111 +197,111 @@
     "mjPerKg": 64,
     "m3perKg": 0.34
   },
-  {
+  "smoked-cheese": {
     "id": "smoked-cheese",
     "name": "Smoked cheese",
     "Co2PerKg": 6.20,
     "mjPerKg": 26.71,
     "m3perKg": 0.11
   },
-  {
+  "spaghetti-carbonara-pre-made-meal": {
     "id": "spaghetti-carbonara-pre-made-meal",
     "name": "Spaghetti Carbonara pre-made meal",
     "Co2PerKg": 3.44,
     "mjPerKg": 28.52,
     "m3perKg": 0.11
   },
-  {
+  "tofu": {
     "id": "tofu",
     "name": "Tofu",
     "Co2PerKg": 3.23,
     "mjPerKg": 14.37,
     "m3perKg": 0.00
   },
-  {
+  "uht-milk": {
     "id": "uht-milk",
     "name": "UHT milk",
     "Co2PerKg": 1.31,
     "mjPerKg": 5.82,
     "m3perKg": 0.02
   },
-  {
+  "vegetarian-salami": {
     "id": "vegetarian-salami",
     "name": "Vegetarian salami",
     "Co2PerKg": 0.19,
     "mjPerKg": 1.88,
     "m3perKg": 0.06
   },
-  {
+  "wholegrain-dry-pasta": {
     "id": "wholegrain-dry-pasta",
     "name": "Wholegrain dry pasta",
     "Co2PerKg": 1.49,
     "mjPerKg": 17.23,
     "m3perKg": 0.01
   },
-  {
+  "lamb": {
     "id": "lamb",
     "name": "Lamb",
     "type": "meat",
     "Co2PerKg": 25.44
   },
-  {
+  "butter": {
     "id": "butter",
     "name": "Butter",
     "Co2PerKg": 11.52
   },
-  {
+  "turkey": {
     "id": "turkey",
     "name": "Turkey",
     "type": "meat",
     "Co2PerKg": 5.9
   },
-  {
+  "rabbit": {
     "id": "rabbit",
     "name": "Rabbit",
     "type": "meat",
     "Co2PerKg": 3.61
   },
-  {
+  "cod": {
     "id": "cod",
     "name": "Cod",
     "type": "meat",
     "Co2PerKg": 3.49
   },
-  {
+  "eggs": {
     "id": "eggs",
     "name": "Eggs",
     "Co2PerKg": 3.4
   },
-  {
+  "insect": {
     "id": "insect",
     "name": "Insect",
     "type": "meat",
     "Co2PerKg": 2.3
   },
-  {
+  "whole-milk": {
     "id": "whole-milk",
     "name": "Whole Milk",
     "Co2PerKg": 1.4
   },
-  {
+  "wheat": {
     "id": "wheat",
     "name": "Wheat",
     "Co2PerKg": 0.51
   },
-  {
+  "peas": {
     "id": "peas",
     "name": "Peas",
     "Co2PerKg": 0.6
   },
-  {
+  "barley": {
     "id": "barley",
     "name": "Barley",
     "Co2PerKg": 0.52
   },
-  {
+  "chickpeas": {
     "id": "chickpeas",
     "name": "Chickpeas",
     "Co2PerKg": 0.67
   }
-]
+}
