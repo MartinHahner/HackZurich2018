@@ -1,12 +1,13 @@
 const ingredientsList = require('../assets/ingredients.json');
 
-findRecipe(ingredients) {
+function findRecipe(ingredients) {
   co2Ing = ingredientsList.filter(e => ingredients.indexOf(e.name));
 
 
 }
 
 module.exports = {
+  ingredientsList,
   findRecipe
 };
 

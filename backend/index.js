@@ -3,6 +3,7 @@ var app = express();
 var fs = require("fs");
 var mysql = require('mysql');
 
+const recipe = require("./src/recipe")
 
 // db stuff
 var con = mysql.createConnection({
@@ -36,11 +37,15 @@ app.get('/listRecipes', function (req, res){
 });
 
 app.get('/ingredient/list', function (req, res){
-
+  res.status(200).send(JSON.stringify(recipe.ingredientsList));
 });
 
 app.get('/ingredient/:id', function (req, res){
-
+  var ingredient = recipe.ingredientsList.find(e => e.id === reg.params.id)
+  if(ingredient) {
+    return res.status(200).send(JSON.stringify(ingredient));
+  }
+  res.status(404);
 });
 
 /**
@@ -50,7 +55,6 @@ app.get('/ingredient/:id', function (req, res){
 app.post('/recipe/search', function (req, res){
 
 });
-
 
 
 var server = app.listen(8081, function () {
