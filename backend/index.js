@@ -59,8 +59,8 @@ app.post('/meal', function (req, res){
               'address': req.body.address,
               'city': req.body.city,
               'zip': req.body.zip,
-              'max_people': req.body.max_people,
-              'co2_score': req.body.co2_score,
+              'max_people': parseInt(req.body.max_people),
+              'co2_score': parseInt(req.body.co2_score),
               'ingredients': req.body.ingredients};
 
   var query = con.query('INSERT INTO meal SET ?', meal, function (error, results){
@@ -82,7 +82,7 @@ app.get('/participate', function (req, res){
   var idmeal = req.query.idmeal;
 
   con.query('SELECT u.iduser, u.firstname, u.lastname, p.status, m.title, m.idmeal, m.title ' +
-            'FROM user u, participate p, meal m WHERE p.idmeal = m.idmeal AND u.iduser = p.iduser AND m.idmeal = ?', [idmeal],
+            'FROM user u, participate p, meal m WHERE p.idmeal = m.idmeal AND u.iduser = p.iduser AND m.idmeal = ?', [parseInt(idmeal)],
             function (error, results, fields){
               if(error) console.log(error);
               res.status(200).json(results);
@@ -91,8 +91,9 @@ app.get('/participate', function (req, res){
 });
 
 app.post('/participate', function (req, res){
-  var participation = {'idmeal': req.body.idmeal,
-                       'iduser': req.body.iduser,
+  console.log(req.body);
+  var participation = {'idmeal': parseInt(req.body.idmeal),
+                       'iduser': parseInt(req.body.iduser),
                        'status': 0};
 
   var query = con.query('INSERT INTO participate SET ?', participation, function (error, results){

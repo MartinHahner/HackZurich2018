@@ -79,8 +79,10 @@ COMMIT;
 -- Data for table `meal`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (1, '2018-09-15', 0, 0, 'Spaghetti carbonara', 'Just some very good spaghetti', 'Technopark 1', 'Zurich', '8400', 3, '10', NULL, 1);
-INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (2, '2018-09-15', 0, 10, 'Pizza', 'Pizza from Italia', 'Bahnhofstrasse 10', 'Zurich', '8400', 5, '5', NULL, 2);
+INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (1, '2018-09-15', 0, 0, 'Spaghetti carbonara', 'Just some very good spaghetti', 'Technopark 1', 'Zurich', '8400', 3, '10', ' ', 1);
+INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (2, '2018-09-15', 0, 10, 'Pizza', 'Pizza from Italia', 'Bahnhofstrasse 10', 'Zurich', '8400', 5, '5', ' ', 2);
+INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (3, '2018-09-15', 0, 10, 'Lasagne', 'Lasagne dal Ticino', 'Zurichstrasse 20', 'Zurich', '8400', 2, '5', ' ', 1);
+INSERT INTO `meal` (`idmeal`, `when`, `location_lat`, `location_lng`, `title`, `description`, `address`, `city`, `zip`, `max_people`, `co2_score`, `ingredients`, `cooked_by`) VALUES (DEFAULT, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
