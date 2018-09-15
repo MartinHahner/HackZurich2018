@@ -33,28 +33,30 @@ var con = mysql.createConnection({
   database: dbDB,
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
   if (err) console.log('no sql found');
   console.log("Connected!");
 });
 
 
-app.get('/', function (req, res){
+app.get('/', function (req, res) {
   res.send('hello!');
 });
 
-app.post('/createMeal', function (req, res){
-  var meal = {'when': req.body.when,
-              'title': req.body.title,
-              'description': req.body.description,
-              'address': req.body.address,
-              'city': req.body.city,
-              'zip': req.body.zip,
-              'max_people': req.body.max_people,
-              'co2_score': req.body.co2_score,
-              'ingredients': req.body.ingredients};
+app.post('/createMeal', function (req, res) {
+  var meal = {
+    'when': req.body.when,
+    'title': req.body.title,
+    'description': req.body.description,
+    'address': req.body.address,
+    'city': req.body.city,
+    'zip': req.body.zip,
+    'max_people': req.body.max_people,
+    'co2_score': req.body.co2_score,
+    'ingredients': req.body.ingredients
+  };
 
-  var query = con.query('INSERT INTO meal SET ?', meal, function (error, results){
+  var query = con.query('INSERT INTO meal SET ?', meal, function (error, results) {
     res.send(meal);
     console.log(query.sql);
 
@@ -62,33 +64,33 @@ app.post('/createMeal', function (req, res){
 
 });
 
-app.get('/listUsers', function (req, res){
-  con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields){
+app.get('/listUsers', function (req, res) {
+  con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields) {
     if (error) throw error;
-    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
   });
 });
 
 app.get('/listMeals', function (req, res) {
-  con.query('SELECT * from meal', function (error, results, fields){
+  con.query('SELECT * from meal', function (error, results, fields) {
     if (error) throw error;
-    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
   });
 })
 
-app.get('/ingredient/list', function (req, res){
+app.get('/ingredient/list', function (req, res) {
   res.status(200).json(recipe.ingredientsList);
 });
 
-app.get('/ingredient/:id', function (req, res){
+app.get('/ingredient/:id', function (req, res) {
   var ingredient = recipe.ingredientsList.find(e => e.id === req.params.id)
 
-  console.log("requesting:",req.params.id, "found:",ingredient)
+  console.log("requesting ingredient:", req.params.id, "found:", ingredient)
 
-  if(ingredient) {
+  if (ingredient) {
     res.status(200).json(ingredient);
   } else {
-    res.sendStatus(404);
+    res.status(404).json({ status: 404, message: `${req.params.id} not found` });
   }
 });
 
@@ -96,15 +98,27 @@ app.get('/ingredient/:id', function (req, res){
  * post a list of ingredients id
  * ["beef", "peas"]
  */
-app.post('/recipe/search', function (req, res){
-
+app.post('/recipe/search', function (req, res) {
+  console.log("find recipe containing:", req.body);
+  res.status(200).json(recipe.recipes[0]);
 });
 
 /**
  * return all recipes
  */
-app.get('/recipe/list', function (req, res){
+app.get('/recipe/list', function (req, res) {
+  res.status(200).json(recipe.recipes);
+});
 
+app.get('/recipe/:id', function (req, res) {
+  var _recipe = recipe.recipes.find(e => e.id === req.params.id)
+  console.log("requesting recipe:", req.params.id, "found:", _recipe)
+
+  if (_recipe) {
+    res.status(200).json(_recipe);
+  } else {
+    res.status(404).json({ status: 404, message: `${req.params.id} not found` });
+  }
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {
