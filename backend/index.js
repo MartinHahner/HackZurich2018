@@ -45,11 +45,12 @@ app.get('/', function (req, res) {
 
 // TODO: add filter
 app.get('/meal', function (req, res) {
-  con.query('SELECT * from meal', function (error, results, fields){
+  con.query('SELECT * FROM meal m, user u WHERE m.cooked_by = u.iduser', function (error, results, fields){
     if (error) res.status(400).send(error);
     res.status(200).json(results);
   });
 });
+
 
 app.post('/meal', function (req, res){
   var meal = {'when': req.body.when,
@@ -111,22 +112,32 @@ app.put('/participate', function (req, res){
 });
 
 
-// either iduser or idmeal
+// either iduser or idmeal or both
 app.get('/review', function (req, res){
-  if(req.query.iduser != undefined){
+  if(req.query.iduser != undefined && req.query.idmeal == undefined){
     var query = con.query('SELECT * FROM meal m, participate p, user u WHERE u.iduser = p.iduser AND m.idmeal = p.idmeal AND p.iduser = ?', parseInt(req.query.iduser),
       function (error, results){
         if(error) res.status(400).send(error);
         else res.status(200).json(results);
       });
     console.log(query.sql);
-  }else if(req.query.idmeal != undefined){
+  }else if(req.query.idmeal != undefined && req.query.iduser == undefined){
     var query = con.query('SELECT * FROM meal m, participate p, user u WHERE u.iduser = p.iduser AND m.idmeal = p.idmeal AND p.idmeal = ?', parseInt(req.query.idmeal),
       function (error, results){
         if(error) res.status(400).send(error);
         else res.status(200).json(results);
       });
     console.log(query.sql);
+  } else if(req.query.idmeal != undefined && req.query.iduser != undefined){
+    var query = con.query('SELECT text, stars, tip, status FROM meal m, participate p, user u ' +
+                          'WHERE u.iduser = p.iduser AND m.idmeal = p.idmeal AND p.idmeal = ? AND p.iduser = ?',
+                          [parseInt(req.query.idmeal),parseInt(req.query.iduser)],
+      function (error, results){
+        if(error) res.status(400).send(error);
+        else res.status(200).json(results);
+      });
+    console.log(query.sql);
+
   }
 });
 
