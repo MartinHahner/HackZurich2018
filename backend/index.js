@@ -43,6 +43,14 @@ app.get('/', function (req, res){
   res.send('hello!');
 });
 
+// TODO: add filter
+app.get('/meal', function (req, res) {
+  con.query('SELECT * from meal', function (error, results, fields){
+    if (error) throw error;
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+  });
+});
+
 app.post('/meal', function (req, res){
   var meal = {'when': req.body.when,
               'title': req.body.title,
@@ -62,14 +70,8 @@ app.post('/meal', function (req, res){
 
 });
 
-app.get('/meal', function (req, res) {
-  con.query('SELECT * from meal', function (error, results, fields){
-    if (error) throw error;
-    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
-  });
-});
 
-app.get('/listUsers', function (req, res){
+app.get('/user', function (req, res){
   con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields){
     if (error) throw error;
     res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
@@ -77,15 +79,42 @@ app.get('/listUsers', function (req, res){
 });
 
 
+// example: /participate?idmeal=1
+app.get('/participate', function (req, res){
+  var idmeal = req.query.idmeal;
+
+  con.query('SELECT u.iduser, u.firstname, u.lastname, p.status, m.title, m.idmeal, m.title ' +
+            'FROM user u, participate p, meal m WHERE p.idmeal = m.idmeal AND u.iduser = p.iduser AND m.idmeal = ?', [idmeal],
+            function (error, results, fields){
+              if(error) console.log(error);
+              res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+            });
+
+});
+
 app.post('/participate', function (req, res){
   var participation = {'idmeal': req.body.idmeal,
                        'iduser': req.body.iduser,
-                       'accepted': 0};
+                       'status': 0};
 
   var query = con.query('INSERT INTO participate SET ?', participation, function (error, results){
     if (error) console.log(error);
     res.status(200).json(participation);
   });
+});
+
+// TOOD: update a standby(0) participation to accept (1) it or refuse (2) it
+app.put('/participate', function (req, res){
+
+});
+
+
+app.get('/review', function (req, res){
+
+});
+
+app.post('/review', function (req, res){
+
 });
 
 
