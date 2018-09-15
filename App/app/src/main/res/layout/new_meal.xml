@@ -44,15 +44,33 @@
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="6dp">
 
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/etTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:gravity="start|top"
-                    android:hint="@string/what"
-                    android:padding="8dp"
-                    android:scrollbars="vertical" />
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/etTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="start|top"
+                        android:hint="@string/what"
+                        android:padding="8dp"
+                        android:scrollbars="vertical" />
+
+                    <ImageButton
+                        android:id="@+id/imgBtnReceipts"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="end"
+                        android:background="@null"
+                        android:contentDescription="@string/help_me_choose"
+                        android:foreground="?selectableItemBackground"
+                        android:src="@drawable/ic_help_black_24dp" />
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -72,6 +90,28 @@
                     android:hint="@string/ingredients"
                     android:padding="8dp"
                     android:scrollbars="vertical" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="6dp">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="start|top"
+                    android:hint="@string/description"
+                    android:padding="8dp"
+                    android:scrollbars="vertical" />
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -88,15 +128,12 @@
 
                 <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/etLocation"
+                    style="?editTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:focusable="false"
-                    android:gravity="start|top"
                     android:hint="@string/location"
-                    android:inputType="none"
-                    android:padding="8dp"
-                    android:scrollbars="vertical" />
+                    android:padding="8dp" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -111,17 +148,17 @@
                 android:foreground="?selectableItemBackground"
                 app:cardCornerRadius="6dp">
 
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/etDateTime"
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvDateTime"
+                    style="?editTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:clickable="false"
                     android:focusable="false"
-                    android:gravity="start|top"
+                    android:focusableInTouchMode="false"
                     android:hint="@string/date_and_time"
-                    android:inputType="none"
-                    android:padding="8dp"
-                    android:scrollbars="vertical" />
+                    android:padding="8dp" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -163,7 +200,7 @@
             android:text="@string/cancel" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnFindReceipts"
+            android:id="@+id/btnOffer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
