@@ -1,21 +1,65 @@
 var express = require('express');
-var app = express();
 var fs = require("fs");
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
+
+var app = express();
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
 const recipe = require("./src/recipe")
+// parse application/json
+app.use(bodyParser.json())
 
 // db stuff
+if (process.env.VCAP_SERVICES) {
+  const vcapServices = JSON.parse(process.env.VCAP_SERVICES);
+  dbUrl = vcapServices.mariadbent[0].credentials.host;
+  dbUser = vcapServices.mariadbent[0].credentials.username;
+  dbPwd = vcapServices.mariadbent[0].credentials.password;
+  dbDB = vcapServices.mariadbent[0].credentials.database;
+
+} else {
+  dbUrl = 'localhost';
+  dbUser = 'root';
+  dbPwd = 'root';
+  dbDB = 'mydb';
+}
+
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "mydb"
+  host: dbUrl,
+  user: dbUser,
+  password: dbPwd,
+  database: dbDB,
 });
 
 con.connect(function(err) {
-  if (err) throw err;
+  if (err) console.log('no sql found');
   console.log("Connected!");
+});
+
+
+app.get('/', function (req, res){
+  res.send('hello!');
+});
+
+app.post('/createMeal', function (req, res){
+  var meal = {'when': req.body.when,
+              'title': req.body.title,
+              'description': req.body.description,
+              'address': req.body.address,
+              'city': req.body.city,
+              'zip': req.body.zip,
+              'max_people': req.body.max_people,
+              'co2_score': req.body.co2_score,
+              'ingredients': req.body.ingredients};
+
+  var query = con.query('INSERT INTO meal SET ?', meal, function (error, results){
+    res.send(meal);
+    console.log(query.sql);
+
+  });
+
 });
 
 app.get('/listUsers', function (req, res){
@@ -59,7 +103,7 @@ app.get('/recipe/list', function (req, res){
 
 });
 
-var server = app.listen(8081, function () {
+var server = app.listen(process.env.PORT || 8080, function () {
 
   var host = server.address().address
   var port = server.address().port
