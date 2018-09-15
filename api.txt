@@ -2,7 +2,7 @@
 GET /meal -- retrive all meals
 POST /meal -- create a new meal
 
-GET /participate?ideal=1 -- retrive all participants of meal with id 1
+GET /participate?idmeal=1 -- retrive all participants of meal with id 1
 POST /participate {idmeal, iduser} -- participate to a meal
 PUT /participate {idmeal, iduser, status} -- update the status of a participation
 
