@@ -142,18 +142,24 @@ app.get('/ingredient/:id', function (req, res) {
  */
 app.post('/recipe/search', function (req, res) {
   console.log("find recipe containing:", req.body);
-  res.status(200).json(recipe.recipes[0]);
+  const _recipes = recipe.findRecipes(req.body, recipe.recipesList);
+
+  if(_recipes) {
+    res.status(200).json(_recipes);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 /**
  * return all recipes
  */
 app.get('/recipe/list', function (req, res) {
-  res.status(200).json(recipe.recipes);
+  res.status(200).json(recipe.recipesList);
 });
 
 app.get('/recipe/:id', function (req, res) {
-  var _recipe = recipe.recipes.find(e => e.id === req.params.id)
+  var _recipe = recipe.recipesList.find(e => e.id === req.params.id)
   console.log("requesting recipe:", req.params.id, "found:", _recipe)
 
   if (_recipe) {
