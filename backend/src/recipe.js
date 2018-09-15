@@ -1,4 +1,12 @@
 const ingredientsList = require('../assets/ingredients.json');
+const axios = require('axios');
+
+const KITCHEN = 'butter,milk,mozzarella,cheddar,american cheese,havarti cheese,onion,garlic,carrot,bell pepper,cucumber,tomato,chicken breast,vegetable oil,olive oil,yogurt,coconut milk,paprika,garlic powder,oregano,cumin,cayenne,nutmeg,curry powder,bay leaf,taco seasoning,italian herbs,garam masala,chipotle,ketchup,vinegar,teriyaki,hot sauce,sriracha,oyster sauce,canola oil,bouillon,peas,chickpea,lentil,edamame,kidney beans,red beans,black beans,almond,peanut'
+
+const CATNAME = 'Dinner,,'
+
+const SUPERCOOK_URL = 'https://www.supercook.com/dyn/results';
+
 
 function findRecipe(ingredients) {
   co2Ing = ingredientsList.filter(e => ingredients.indexOf(e.name));
@@ -6,6 +14,27 @@ function findRecipe(ingredients) {
 
   return recipesList[0];
 }
+
+function findRecipesFromSupercook(ingredients) {
+  const config = {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  };
+
+  const requestBody = {
+    catname: CATNAME,
+    kitchen: KITCHEN,
+    focus: ingredients.join(',')
+  }
+
+  axios.post(SUPERCOOK_URL, requestBody, config).then(res => {
+    console.log(res.data.results[0])
+  }).catch(console.log)
+}
+
+findRecipesFromSupercook(["chicken breast", "peas"])
 
 function findRecipes(ingredients, _recipes) {
   const ingredient = ingredients[0];
@@ -96,5 +125,6 @@ const recipesList = [
 module.exports = {
   ingredientsList,
   findRecipes,
+  findRecipesFromSupercook,
   recipesList
 };
