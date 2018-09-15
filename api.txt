@@ -4,7 +4,7 @@ POST /meal -- create a new meal
 
 GET /participate?idmeal=1 -- retrive all participants of meal with id 1
 POST /participate {idmeal, iduser} -- participate to a meal
-PUT /participate {idmeal, iduser, status} -- update the status of a participation
+PUT /participate {idmeal, iduser, stat} -- update the status of a participation
 
 GET /review?iduser=1 -- retrive all reviews from user with id 1
 POST /review {text, stars, tip} -- create a new review
