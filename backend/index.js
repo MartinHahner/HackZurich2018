@@ -38,10 +38,14 @@ app.get('/ingredient/list', function (req, res){
 
 app.get('/ingredient/:id', function (req, res){
   var ingredient = recipe.ingredientsList.find(e => e.id === req.params.id)
+
+  console.log("requesting:",req.params.id, "found:",ingredient)
+
   if(ingredient) {
-    return res.status(200).json(ingredient);
+    res.status(200).json(ingredient);
+  } else {
+    res.sendStatus(404);
   }
-  res.status(404);
 });
 
 /**

@@ -2,8 +2,7 @@ const ingredientsList = require('../assets/ingredients.json');
 
 function findRecipe(ingredients) {
   co2Ing = ingredientsList.filter(e => ingredients.indexOf(e.name));
-
-
+  ingredientsList.filter(e => ingredients.indexOf(e.name));
 }
 
 module.exports = {
@@ -13,39 +12,63 @@ module.exports = {
 
 const recipes = [
   {
-    ingredients: ["Beef, Peas", "Cheese"]
+    name: "Beef stir-fry",
+    description: "Write stuff here",
+    ingredients: ["beef", "peas"]
   },
   {
-    ingredients: ["Red kidney beans", "Cheese"]
+    name: "Beef sandwich",
+    description: "Write stuff here",
+    ingredients: ["beef", "cheese"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Chicken and peas tartlets",
+    description: "Write stuff here",
+    ingredients: ["chicken", "peas"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Garlic Butter Creamed Corn Chicken",
+    description: "Write stuff here",
+    ingredients: ["chicken", "corn"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Lamb Korma with lentils",
+    description: "Write stuff here",
+    ingredients: ["lamb", "lentils"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Pork stew",
+    description: "Write stuff here",
+    ingredients: ["pork", "milk"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Crispy Chicken",
+    description: "Write stuff here",
+    ingredients: ["chicken", "wheat"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Spaghetti Carbonara",
+    description: "Write stuff here",
+    ingredients: ["eggs", "pancetta"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Sausage-rolls with mashed peas",
+    description: "Write stuff here",
+    ingredients: ["pork-sausages", "peas"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Almond-crusted tofu",
+    description: "Write stuff here",
+    ingredients: ["tofu", "almonds"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Chili sin carne",
+    description: "Write stuff here",
+    ingredients: ["rice", "quorn"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    name: "Croque Monsieur",
+    description: "Croque Monsieur",
+    ingredients: ["ham", "gruyere"]
   }
 ]
