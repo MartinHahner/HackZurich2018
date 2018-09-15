@@ -32,10 +32,6 @@ app.get('/listMeals', function (req, res) {
   });
 })
 
-app.get('/listRecipes', function (req, res){
-
-});
-
 app.get('/ingredient/list', function (req, res){
   res.status(200).json(recipe.ingredientsList);
 });
@@ -56,6 +52,12 @@ app.post('/recipe/search', function (req, res){
 
 });
 
+/**
+ * return all recipes
+ */
+app.get('/recipe/list', function (req, res){
+
+});
 
 var server = app.listen(8081, function () {
 
