@@ -1,17 +1,20 @@
 [
   {
+    "id": "Almond milk",
     "name": "Almond milk",
     "Co2PerKg": 1.09,
     "mjPerKg": 1.09,
     "m3perKg": 1.09
   },
   {
+    "id": "Almonds",
     "name": "Almonds",
     "Co2PerKg": 2.18,
     "mjPerKg": 26.31,
     "m3perKg": 1.90
   },
   {
+    "id": "Beef",
     "name": "Beef",
     "type": "meat",
     "Co2PerKg": 27.76,
@@ -19,18 +22,21 @@
     "m3perKg": 0.47
   },
   {
+    "id": "Cheese slices",
     "name": "Cheese slices",
     "Co2PerKg": 8.29,
     "mjPerKg": 35.50,
     "m3perKg": 0.15
   },
   {
+    "id": "Cheese spread",
     "name": "Cheese spread",
     "Co2PerKg": 6.20,
     "mjPerKg": 26.71,
     "m3perKg": 0.11
   },
   {
+    "id": "Chicken",
     "name": "Chicken",
     "type": "meat",
     "Co2PerKg": 6.82,
@@ -38,24 +44,28 @@
     "m3perKg": 0.34
   },
   {
+    "id": "Chocolate",
     "name": "Chocolate",
     "Co2PerKg": 14.67,
     "mjPerKg": 90.25,
     "m3perKg": 0.38
   },
   {
+    "id": "Chocolate milk",
     "name": "Chocolate milk",
     "Co2PerKg": 4.65,
     "mjPerKg": 26.92,
     "m3perKg": 0.11
   },
   {
+    "id": "Corn",
     "name": "Corn",
     "Co2PerKg": 0.19,
     "mjPerKg": 1.88,
     "m3perKg": 0.06
   },
   {
+    "id": "Dried Beef",
     "name": "Dried Beef",
     "type": "meat",
     "Co2PerKg": 27.76,
@@ -63,30 +73,35 @@
     "m3perKg": 0.47
   },
   {
+    "id": "Dry Pasta",
     "name": "Dry Pasta",
     "Co2PerKg": 1.49,
     "mjPerKg": 17.23,
     "m3perKg": 0.01
   },
   {
+    "id": "Fresh ravioli with meat",
     "name": "Fresh ravioli with meat",
     "Co2PerKg": 10.25,
     "mjPerKg": 66.22,
     "m3perKg": 0.16
   },
   {
+    "id": "Fresh ravioli with spinach and ricotta",
     "name": "Fresh ravioli with spinach and ricotta",
     "Co2PerKg": 3.06,
     "mjPerKg": 20.38,
     "m3perKg": 0.04
   },
   {
+    "id": "Gruyére",
     "name": "Gruyére",
     "Co2PerKg": 8.29,
     "mjPerKg": 35.50,
     "m3perKg": 0.15
   },
   {
+    "id": "Ham",
     "name": "Ham",
     "type": "meat",
     "Co2PerKg": 10.76,
@@ -94,24 +109,28 @@
     "m3perKg": 0.52
   },
   {
+    "id": "Lentils",
     "name": "Lentils",
     "Co2PerKg": 0.78,
     "mjPerKg": 5.67,
     "m3perKg": 0.14
   },
   {
+    "id": "Low fat organic milk",
     "name": "Low fat organic milk",
     "Co2PerKg": 1.11,
     "mjPerKg": 1.39,
     "m3perKg": 0.00
   },
   {
+    "id": "Non-free range eggs",
     "name": "Non-free range eggs",
     "Co2PerKg": 3.94,
     "mjPerKg": 36.10,
     "m3perKg": 0.18
   },
   {
+    "id": "Pancetta",
     "name": "Pancetta",
     "type": "meat",
     "Co2PerKg": 10.76,
@@ -119,6 +138,7 @@
     "m3perKg": 0.52
   },
   {
+    "id": "Pork",
     "name": "Pork",
     "type": "meat",
     "Co2PerKg": 10.76,
@@ -126,6 +146,7 @@
     "m3perKg": 0.52
   },
   {
+    "id": "Pork sausages",
     "name": "Pork sausages",
     "type": "meat",
     "Co2PerKg": 10.76,
@@ -133,30 +154,35 @@
     "m3perKg": 0.52
   },
   {
+    "id": "Quorn",
     "name": "Quorn",
     "Co2PerKg": 0.19,
     "mjPerKg": 1.88,
     "m3perKg": 0.06
   },
   {
+    "id": "Red kidney beans",
     "name": "Red kidney beans",
     "Co2PerKg": 0.78,
     "mjPerKg": 5.67,
     "m3perKg": 0.14
   },
   {
+    "id": "Rice milk",
     "name": "Rice milk",
     "Co2PerKg": 0.26,
     "mjPerKg": 0.26,
     "m3perKg": 0.26
   },
   {
+    "id": "Risotto rice",
     "name": "Risotto rice",
     "Co2PerKg": 1.03,
     "mjPerKg": 5.43,
     "m3perKg": 0.35
   },
   {
+    "id": "Sliced beef",
     "name": "Sliced beef",
     "type": "meat",
     "Co2PerKg": 27.76,
@@ -164,6 +190,7 @@
     "m3perKg": 0.47
   },
   {
+    "id": "Sliced chicken",
     "name": "Sliced chicken",
     "type": "meat",
     "Co2PerKg": 6.8,
@@ -171,91 +198,109 @@
     "m3perKg": 0.34
   },
   {
+    "id": "Smoked cheese",
     "name": "Smoked cheese",
     "Co2PerKg": 6.20,
     "mjPerKg": 26.71,
     "m3perKg": 0.11
   },
   {
+    "id": "Spaghetti Carbonara pre-made meal",
     "name": "Spaghetti Carbonara pre-made meal",
     "Co2PerKg": 3.44,
     "mjPerKg": 28.52,
     "m3perKg": 0.11
   },
   {
+    "id": "Tofu",
     "name": "Tofu",
     "Co2PerKg": 3.23,
     "mjPerKg": 14.37,
     "m3perKg": 0.00
   },
   {
+    "id": "UHT milk",
     "name": "UHT milk",
     "Co2PerKg": 1.31,
     "mjPerKg": 5.82,
     "m3perKg": 0.02
   },
   {
+    "id": "Vegetarian salami",
     "name": "Vegetarian salami",
     "Co2PerKg": 0.19,
     "mjPerKg": 1.88,
     "m3perKg": 0.06
   },
   {
+    "id": "Wholegrain dry pasta",
     "name": "Wholegrain dry pasta",
     "Co2PerKg": 1.49,
     "mjPerKg": 17.23,
     "m3perKg": 0.01
   },
   {
+    "id": "Lamb",
     "name": "Lamb",
     "type": "meat",
     "Co2PerKg": 25.44
   },
   {
+    "id": "Butter",
     "name": "Butter",
     "Co2PerKg": 11.52
   },
   {
+    "id": "Turkey",
     "name": "Turkey",
     "type": "meat",
     "Co2PerKg": 5.9
   },
   {
+    "id": "Rabbit",
     "name": "Rabbit",
     "type": "meat",
     "Co2PerKg": 3.61
   },
   {
+    "id": "Cod",
     "name": "Cod",
     "type": "meat",
     "Co2PerKg": 3.49
   },
   {
+    "id": "Eggs",
     "name": "Eggs",
     "Co2PerKg": 3.4
   },
   {
+    "id": "Insect",
     "name": "Insect",
     "type": "meat",
     "Co2PerKg": 2.3
   },
   {
+    "id": "Whole Milk",
     "name": "Whole Milk",
     "Co2PerKg": 1.4
   },
   {
+    "id": "Wheat",
     "name": "Wheat",
     "Co2PerKg": 0.51
   },
   {
+    "id": "Peas",
     "name": "Peas",
     "Co2PerKg": 0.6
   },
   {
+    "id": "Barley",
     "name": "Barley",
     "Co2PerKg": 0.52
   },
   {
+    "id": "Chickpeas",
     "name": "Chickpeas",
     "Co2PerKg": 0.67
   }

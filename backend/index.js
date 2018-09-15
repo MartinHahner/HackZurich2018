@@ -25,7 +25,25 @@ app.get('/listMeals', function (req, res) {
 
 app.get('/listRecipes', function (req, res){
 
-})
+});
+
+app.get('/ingredient/list', function (req, res){
+
+});
+
+app.get('/ingredient/:id', function (req, res){
+
+});
+
+/**
+ * post a list of ingredients id
+ * ["beef", "peas"]
+ */
+app.post('/recipe/search', function (req, res){
+
+});
+
+
 
 var server = app.listen(8081, function () {
 
