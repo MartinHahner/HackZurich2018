@@ -43,40 +43,82 @@ app.get('/', function (req, res) {
   res.send('hello!');
 });
 
-app.post('/createMeal', function (req, res) {
-  var meal = {
-    'when': req.body.when,
-    'title': req.body.title,
-    'description': req.body.description,
-    'address': req.body.address,
-    'city': req.body.city,
-    'zip': req.body.zip,
-    'max_people': req.body.max_people,
-    'co2_score': req.body.co2_score,
-    'ingredients': req.body.ingredients
-  };
+// TODO: add filter
+app.get('/meal', function (req, res) {
+  con.query('SELECT * from meal', function (error, results, fields){
+    if (error) throw error;
+    res.status(200).json(results);
+  });
+});
 
-  var query = con.query('INSERT INTO meal SET ?', meal, function (error, results) {
-    res.send(meal);
-    console.log(query.sql);
+app.post('/meal', function (req, res){
+  var meal = {'when': req.body.when,
+              'title': req.body.title,
+              'description': req.body.description,
+              'address': req.body.address,
+              'city': req.body.city,
+              'zip': req.body.zip,
+              'max_people': req.body.max_people,
+              'co2_score': req.body.co2_score,
+              'ingredients': req.body.ingredients};
 
+  var query = con.query('INSERT INTO meal SET ?', meal, function (error, results){
+    res.status(200).json(meal);
   });
 
 });
 
-app.get('/listUsers', function (req, res) {
-  con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields) {
+app.get('/user', function (req, res){
+  con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields){
     if (error) throw error;
-    res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+    res.status(200).json(results);
   });
 });
 
-app.get('/listMeals', function (req, res) {
-  con.query('SELECT * from meal', function (error, results, fields) {
-    if (error) throw error;
-    res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
+
+// example: /participate?idmeal=1
+app.get('/participate', function (req, res){
+  var idmeal = req.query.idmeal;
+
+  con.query('SELECT u.iduser, u.firstname, u.lastname, p.status, m.title, m.idmeal, m.title ' +
+            'FROM user u, participate p, meal m WHERE p.idmeal = m.idmeal AND u.iduser = p.iduser AND m.idmeal = ?', [idmeal],
+            function (error, results, fields){
+              if(error) console.log(error);
+              res.status(200).json(results);
+            });
+
+});
+
+app.post('/participate', function (req, res){
+  var participation = {'idmeal': req.body.idmeal,
+                       'iduser': req.body.iduser,
+                       'status': 0};
+
+  var query = con.query('INSERT INTO participate SET ?', participation, function (error, results){
+    if (error) console.log(error);
+    res.status(200).json(participation);
   });
-})
+});
+
+// TOOD: update a standby(0) participation to accept (1) it or refuse (2) it
+app.put('/participate', function (req, res){
+  var query = con.query('UPDATE participate SET status = ? WHERE idmeal = ? AND iduser = ?', [parseInt(req.body.stat),parseInt(req.body.idmeal), parseInt(req.body.iduser)],
+    function(error, results){
+      if (error) console.log(error);
+      res.status(200).send(results.affectedRows + " record(s) updated");
+    });
+  console.log(query.sql);
+});
+
+
+app.get('/review', function (req, res){
+
+});
+
+app.post('/review', function (req, res){
+
+});
+
 
 app.get('/ingredient/list', function (req, res) {
   res.status(200).json(recipe.ingredientsList);
