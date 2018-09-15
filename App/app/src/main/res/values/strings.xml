@@ -1,11 +1,25 @@
 <resources>
     <string name="app_name">Mealsh</string>
     <string name="ingredients">Ingredients</string>
-    <string name="cancel">Cancel</string>
     <string name="offer">Offer</string>
     <string name="location">Location</string>
     <string name="what">What</string>
     <string name="offer_a_meal">Offer a meal</string>
     <string name="date_and_time">Date and Time</string>
     <string name="maxPeople">Max People</string>
+    <string name="cancel">Cancel</string>
+    <string name="help_me_choose">Help me choose</string>
+    <string name="description">Description</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="no_location">No location available</string>
+    <string name="participate_to_meal">Participate to Meal</string>
+    <string name="back">Back</string>
+    <string name="participate">Participate</string>
+    <string name="host">Host</string>
+    <string name="note_for_host">Message to Host</string>
+    <string name="after_participate">You will get a notification if you the host accepts you</string>
 </resources>
