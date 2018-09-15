@@ -3,9 +3,22 @@ const ingredientsList = require('../assets/ingredients.json');
 function findRecipe(ingredients) {
   co2Ing = ingredientsList.filter(e => ingredients.indexOf(e.name));
   ingredientsList.filter(e => ingredients.indexOf(e.name));
+
+  return recipesList[0];
 }
 
-const recipes = [
+function findRecipes(ingredients, _recipes) {
+  const ingredient = ingredients[0];
+  console.log("ingredient", ingredient)
+  if (ingredient) {
+    possibleRecipes = _recipes.filter(e => e.ingredients.indexOf(ingredient) > -1)
+    return findRecipes(ingredients.slice(1), possibleRecipes)
+  }
+  return _recipes;
+}
+
+
+const recipesList = [
   {
     id: "beef-stir-fry",
     name: "Beef stir-fry",
@@ -82,6 +95,6 @@ const recipes = [
 
 module.exports = {
   ingredientsList,
-  findRecipe,
-  recipes
+  findRecipes,
+  recipesList
 };

@@ -46,7 +46,7 @@ app.get('/', function (req, res) {
 // TODO: add filter
 app.get('/meal', function (req, res) {
   con.query('SELECT * from meal', function (error, results, fields){
-    if (error) throw error;
+    if (error) res.status(400).send(error);
     res.status(200).json(results);
   });
 });
@@ -76,7 +76,7 @@ app.get('/user', function (req, res){
 });
 
 
-// example: /participate?idmeal=1
+// info regarding the participation to a particular meal
 app.get('/participate', function (req, res){
   var idmeal = req.query.idmeal;
 
@@ -100,7 +100,7 @@ app.post('/participate', function (req, res){
   });
 });
 
-// TOOD: update a standby(0) participation to accept (1) it or refuse (2) it
+// 0: standby, 1: not accepted, 2: accepted
 app.put('/participate', function (req, res){
   var query = con.query('UPDATE participate SET status = ? WHERE idmeal = ? AND iduser = ?', [parseInt(req.body.stat),parseInt(req.body.idmeal), parseInt(req.body.iduser)],
     function(error, results){
@@ -111,11 +111,32 @@ app.put('/participate', function (req, res){
 });
 
 
+// either iduser or idmeal
 app.get('/review', function (req, res){
-
+  if(req.query.iduser != undefined){
+    var query = con.query('SELECT * FROM meal m, participate p, user u WHERE u.iduser = p.iduser AND m.idmeal = p.idmeal AND p.iduser = ?', parseInt(req.query.iduser),
+      function (error, results){
+        if(error) res.status(400).send(error);
+        else res.status(200).json(results);
+      });
+    console.log(query.sql);
+  }else if(req.query.idmeal != undefined){
+    var query = con.query('SELECT * FROM meal m, participate p, user u WHERE u.iduser = p.iduser AND m.idmeal = p.idmeal AND p.idmeal = ?', parseInt(req.query.idmeal),
+      function (error, results){
+        if(error) res.status(400).send(error);
+        else res.status(200).json(results);
+      });
+    console.log(query.sql);
+  }
 });
 
 app.post('/review', function (req, res){
+  var query = con.query('UPDATE participate SET status = ?, text = ?, stars = ?, tip = ? WHERE idmeal = ? AND iduser = ?',
+                        [parseInt(req.body.stat),req.body.text, req.body.stars, req.body.tip, req.body.idmeal, req.body.iduser],
+    function (error, results){
+      if(error) res.status(400).send(error);
+      else res.status(200).send(results.affectedRows + " record(s) updated");
+    });
 
 });
 
@@ -142,18 +163,24 @@ app.get('/ingredient/:id', function (req, res) {
  */
 app.post('/recipe/search', function (req, res) {
   console.log("find recipe containing:", req.body);
-  res.status(200).json(recipe.recipes[0]);
+  const _recipes = recipe.findRecipes(req.body, recipe.recipesList);
+
+  if(_recipes) {
+    res.status(200).json(_recipes);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 /**
  * return all recipes
  */
 app.get('/recipe/list', function (req, res) {
-  res.status(200).json(recipe.recipes);
+  res.status(200).json(recipe.recipesList);
 });
 
 app.get('/recipe/:id', function (req, res) {
-  var _recipe = recipe.recipes.find(e => e.id === req.params.id)
+  var _recipe = recipe.recipesList.find(e => e.id === req.params.id)
   console.log("requesting recipe:", req.params.id, "found:", _recipe)
 
   if (_recipe) {
