@@ -2,50 +2,86 @@ const ingredientsList = require('../assets/ingredients.json');
 
 function findRecipe(ingredients) {
   co2Ing = ingredientsList.filter(e => ingredients.indexOf(e.name));
-
-
+  ingredientsList.filter(e => ingredients.indexOf(e.name));
 }
-
-module.exports = {
-  ingredientsList,
-  findRecipe
-};
 
 const recipes = [
   {
-    ingredients: ["Beef, Peas", "Cheese"]
+    id: "beef-stir-fry",
+    name: "Beef stir-fry",
+    description: "Write stuff here",
+    ingredients: ["beef", "peas"]
   },
   {
-    ingredients: ["Red kidney beans", "Cheese"]
+    id: "beef-sandwich",
+    name: "Beef sandwich",
+    description: "Write stuff here",
+    ingredients: ["beef", "cheese"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "chicken-and-peas-tartlets",
+    name: "Chicken and peas tartlets",
+    description: "Write stuff here",
+    ingredients: ["chicken", "peas"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "garlic-butter-creamed-corn-chicken",
+    name: "Garlic Butter Creamed Corn Chicken",
+    description: "Write stuff here",
+    ingredients: ["chicken", "corn"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "lamb-korma-with-lentils",
+    name: "Lamb Korma with lentils",
+    description: "Write stuff here",
+    ingredients: ["lamb", "lentils"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "pork-stew",
+    name: "Pork stew",
+    description: "Write stuff here",
+    ingredients: ["pork", "milk"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "crispy-chicken",
+    name: "Crispy Chicken",
+    description: "Write stuff here",
+    ingredients: ["chicken", "wheat"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "spaghetti-carbonara",
+    name: "Spaghetti Carbonara",
+    description: "Write stuff here",
+    ingredients: ["eggs", "pancetta"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "sausage-rolls-with-mashed-peas",
+    name: "Sausage-rolls with mashed peas",
+    description: "Write stuff here",
+    ingredients: ["pork-sausages", "peas"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "almond-crusted-tofu",
+    name: "Almond-crusted tofu",
+    description: "Write stuff here",
+    ingredients: ["tofu", "almonds"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "chili-sin-carne",
+    name: "Chili sin carne",
+    description: "Write stuff here",
+    ingredients: ["rice", "quorn"]
   },
   {
-    ingredients: ["Chicken", "Cheese"]
+    id: "croque-monsieur",
+    name: "Croque Monsieur",
+    description: "Croque Monsieur",
+    ingredients: ["ham", "gruyere"]
   }
 ]
+
+module.exports = {
+  ingredientsList,
+  findRecipe,
+  recipes
+};

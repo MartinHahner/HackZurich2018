@@ -33,13 +33,13 @@ var con = mysql.createConnection({
   database: dbDB,
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
   if (err) console.log('no sql found');
   console.log("Connected!");
 });
 
 
-app.get('/', function (req, res){
+app.get('/', function (req, res) {
   res.send('hello!');
 });
 
@@ -70,11 +70,10 @@ app.post('/meal', function (req, res){
 
 });
 
-
 app.get('/user', function (req, res){
   con.query('SELECT iduser, firstname, lastname from user', function (error, results, fields){
     if (error) throw error;
-    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    res.send(JSON.stringify({ "status": 200, "error": null, "response": results }));
   });
 });
 
@@ -118,31 +117,47 @@ app.post('/review', function (req, res){
 });
 
 
-app.get('/ingredient/list', function (req, res){
+app.get('/ingredient/list', function (req, res) {
   res.status(200).json(recipe.ingredientsList);
 });
 
-app.get('/ingredient/:id', function (req, res){
+app.get('/ingredient/:id', function (req, res) {
   var ingredient = recipe.ingredientsList.find(e => e.id === req.params.id)
-  if(ingredient) {
-    return res.status(200).json(ingredient);
+
+  console.log("requesting ingredient:", req.params.id, "found:", ingredient)
+
+  if (ingredient) {
+    res.status(200).json(ingredient);
+  } else {
+    res.status(404).json({ status: 404, message: `${req.params.id} not found` });
   }
-  res.status(404);
 });
 
 /**
  * post a list of ingredients id
  * ["beef", "peas"]
  */
-app.post('/recipe/search', function (req, res){
-
+app.post('/recipe/search', function (req, res) {
+  console.log("find recipe containing:", req.body);
+  res.status(200).json(recipe.recipes[0]);
 });
 
 /**
  * return all recipes
  */
-app.get('/recipe/list', function (req, res){
+app.get('/recipe/list', function (req, res) {
+  res.status(200).json(recipe.recipes);
+});
 
+app.get('/recipe/:id', function (req, res) {
+  var _recipe = recipe.recipes.find(e => e.id === req.params.id)
+  console.log("requesting recipe:", req.params.id, "found:", _recipe)
+
+  if (_recipe) {
+    res.status(200).json(_recipe);
+  } else {
+    res.status(404).json({ status: 404, message: `${req.params.id} not found` });
+  }
 });
 
 var server = app.listen(process.env.PORT || 8080, function () {
