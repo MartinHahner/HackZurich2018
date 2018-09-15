@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Mealsh</string>
-    <string name="title">Title</string>
     <string name="ingredients">Ingredients</string>
+    <string name="cancel">Cancel</string>
+    <string name="offer">Offer</string>
+    <string name="location">Location</string>
+    <string name="what">What</string>
+    <string name="offer_a_meal">Offer a meal</string>
+    <string name="date_and_time">Date and Time</string>
+    <string name="maxPeople">Max People</string>
 </resources>
