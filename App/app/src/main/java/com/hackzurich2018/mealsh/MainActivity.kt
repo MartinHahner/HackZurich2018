@@ -18,17 +18,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.EditText
 import com.fourmob.datetimepicker.date.DatePickerDialog
-import com.hackzurich2018.mealsh.MagicInterface.Meal
 import com.sleepbot.datetimepicker.time.TimePickerDialog
 import java.text.DateFormat
 import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var magicInterface: MagicInterface
     private var userId: Int = 0
     private var location: Location? = null
     private lateinit var adapter: Adapter
@@ -41,33 +39,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById<Toolbar>(R.id.toolbar).apply {
             setOnClickListener { updateList() }
         })
-        title = "${getString(R.string.app_name)} (${intent.getStringExtra("Email")})"
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { showOfferDialog() }
         userId = intent.getIntExtra("User-ID", -1)
 
-        magicInterface = MagicInterface(userId)
-
-        val mLocationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-
-            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000,
-                    10f, object : LocationListener {
-                override fun onLocationChanged(loc: Location) {
-                    location = loc
-                    updateList()
-                }
-
-                override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
-
-                override fun onProviderEnabled(provider: String?) {}
-
-                override fun onProviderDisabled(provider: String?) {}
-            })
-        } else
-            throw AssertionError("Permission not granted")
+        updateList()
 
         recyclerView = findViewById(R.id.recyclerView)
         val a = Adapter(listOf())
@@ -76,18 +52,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateList() {
-        val location = location
-        Thread {
-            magicInterface.getMeals(location, userId) { meals ->
-                runOnUiThread {
-                    adapter = Adapter(meals)
-                    adapter.listener = {
-                        showMeal(it)
-                    }
-                    recyclerView.adapter = adapter
-                }
-            }
-        }.start()
+        adapter = Adapter(listOf(
+                Meal(0, "17-09-2018T18:30:00.000Z", 235, 28, "Spaghetti",
+                        "Grandma style", "Hardbrücke", "Zurich", "8001", 20, "",
+                        "Pasta, Tomatosauce", 1, 1, "Martina", "Miller"),
+                Meal(1, "17-09-2018T12:30:00.000Z", 235, 28, "Lasagne",
+                        "Grandma style", "Centralstation", "Zurich", "8001", 20, "",
+                        "Carrots, Pasta, Tomatosauce", 1, 1, "Hans", "Fenster")
+        ))
+        adapter.listener = {
+            showMeal(it)
+        }
+        recyclerView.adapter = adapter
+
     }
 
     private fun showOfferDialog() {
@@ -109,12 +86,12 @@ class MainActivity : AppCompatActivity() {
         }
         view.findViewById<View>(R.id.imgBtnReceipts).setOnClickListener {
             val ingredients = etIngredients.text.toString()
-            val receipts = magicInterface.getReceipts(ingredients)
+            val receipts = listOf("Receipt 1", "Receipt 2", "Receipt 3", "Receipt 4", "Receipt 5")
             showListDialog(receipts) { receipt ->
-                etTitle.setText(receipt.name)
-                etIngredients.setText(receipt.ingredients)
-                etDescription.setText(receipt.description)
-                etMaxPeople.setText(receipt.maxPeople.toString())
+                etTitle.setText(receipt)
+                etIngredients.setText(receipt)
+                etDescription.setText(receipt)
+                etMaxPeople.setText(1.toString())
             }
         }
         view.findViewById<View>(R.id.cardDateTime).setOnClickListener {
@@ -125,14 +102,6 @@ class MainActivity : AppCompatActivity() {
         view.findViewById<View>(R.id.btnOffer).setOnClickListener {
             if (tvDateAndTime.text.toString() == "")
                 return@setOnClickListener
-            magicInterface.offerMeal(
-                    etTitle.text.toString(),
-                    etIngredients.text.toString(),
-                    etDescription.text.toString(),
-                    etLocation.text.toString(),
-                    adapter.df.parse(tvDateAndTime.text.toString()).time,
-                    etMaxPeople.text.toString().toIntOrNull() ?: 1
-            )
             dialog.dismiss()
             updateList()
         }
@@ -159,24 +128,23 @@ class MainActivity : AppCompatActivity() {
         dpd.show(supportFragmentManager, "DatePickerDialog")
     }
 
-    private fun showMeal(meal: MagicInterface.Meal) {
+    private fun showMeal(meal: Meal) {
         val view = layoutInflater.inflate(R.layout.show_meal, null)
         val dialog = AlertDialog.Builder(this)
                 .setView(view)
                 .show()
 
         val hosttext = """
-                Host: ${meal.hostFirstName} ${meal.hostLastName}
-                Rating: ${meal.hostRating}/10
+                Host: ${meal.firstname} ${meal.lastname}
             """.trimIndent()
         val mealtext = """
                 Meal: ${meal.title}
 
-                When: ${adapter.df.format(meal._when)}
+                When: ${adapter.df.format(parseFromDB(meal.`when`))}
 
-                Address: ${meal.address}
+                Address: ${meal.location_lat}, ${meal.location_lng}
 
-                People participating: ${meal.people}/${meal.maxPeople}
+                People: ${meal.max_people}
 
                 Ingredients:
                 ${meal.ingredients}
@@ -187,21 +155,19 @@ class MainActivity : AppCompatActivity() {
 
         view.findViewById<AppCompatTextView>(R.id.tvHost).apply {
             text = hosttext
-            setOnClickListener { showReviews(meal.hostId) }
+            setOnClickListener { showReviews(meal.iduser.toLong()) }
         }
         view.findViewById<AppCompatTextView>(R.id.tvMeal).text = mealtext
 
         view.findViewById<View>(R.id.btnBack).setOnClickListener { dialog.dismiss() }
         view.findViewById<View>(R.id.btnParticipate).setOnClickListener {
             AlertDialog.Builder(this).setMessage(getString(R.string.after_participate)).show()
-            magicInterface.applyForMeal(userId, meal.idMeal,
-                    view.findViewById<EditText>(R.id.etNoteForHost).text.toString())
             dialog.dismiss()
         }
     }
 
     private fun showReviews(hostId: Long) {
-        showListDialog(magicInterface.getReviews(hostId)) {}
+        showListDialog(listOf("<Review 1>", "<Review 2>", "<Review 3>", "<Review 4>")) {}
     }
 
     private fun <T> showListDialog(items: List<T>, onSelect: (T) -> Unit) {
@@ -232,13 +198,13 @@ class Adapter(private val meals: List<Meal>) : RecyclerView.Adapter<MealHolder>(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MealHolder, position: Int) {
         val m = meals[position]
-        holder.primary.text = "${m.title} for ${m.maxPeople}"
-        holder.secondary.text = m.address
-        holder.datetime.text = df.format(Date(m._when))
+        holder.primary.text = "${m.title} for ${m.max_people}"
+        holder.secondary.text = m.location_lat.toString() + ", " + m.location_lng
+        holder.datetime.text = df.format(parseFromDB(m.`when`))
         holder.card.setOnClickListener {
             listener?.invoke(m)
         }
-        holder.card.setCardBackgroundColor(when (m.state) {
+        holder.card.setCardBackgroundColor(when (null) {
             0 -> Color.parseColor("#22FFFF00")
             1 -> Color.parseColor("#22FF0000")
             2 -> Color.parseColor("#2200FF00")
@@ -253,3 +219,6 @@ class MealHolder(view: View) : RecyclerView.ViewHolder(view) {
     val datetime: AppCompatTextView = view.findViewById(R.id.datetime)
     val card: CardView = view.findViewById(R.id.card)
 }
+
+fun parseFromDB(s: String): Date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS",
+        Locale.getDefault()).parse(s.replace("[TZ]".toRegex(), " "))
